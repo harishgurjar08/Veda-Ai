@@ -33,8 +33,10 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 // Routes
 app.use('/api/assignments', assignmentRoutes);
 
+import { Request, Response } from 'express';
+
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'OK', environment: process.env.NODE_ENV || 'development' });
 });
 

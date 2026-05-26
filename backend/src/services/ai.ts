@@ -125,7 +125,7 @@ function generateMockPaper(assignment: Assignment): GeneratedPaper {
   // Distribute questions across requested types
   const questionsPerType = Math.ceil(totalQuestions / questionTypes.length);
   
-  questionTypes.forEach((type, sectionIdx) => {
+  questionTypes.forEach((type: string, sectionIdx: number) => {
     const sectionChar = String.fromCharCode(65 + sectionIdx);
     const typeLabel = 
       type === 'mcq' ? 'Multiple Choice Questions' :

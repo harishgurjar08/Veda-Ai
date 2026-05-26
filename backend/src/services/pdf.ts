@@ -75,14 +75,14 @@ function generateMinimalMockPDF(assignment: Assignment): Buffer {
   ];
 
   if (paper?.sections) {
-    paper.sections.forEach(s => {
+    paper.sections.forEach((s: any) => {
       contentLines.push(`\n${s.title}`);
       contentLines.push(`Instruction: ${s.instruction}`);
       contentLines.push(`-------------------------------------`);
-      s.questions.forEach(q => {
+      s.questions.forEach((q: any) => {
         contentLines.push(`Q${q.number}. ${q.text}  [${q.difficulty.toUpperCase()}] [${q.marks} Marks]`);
         if (q.options && q.options.length > 0) {
-          q.options.forEach(opt => contentLines.push(`   ${opt}`));
+          q.options.forEach((opt: any) => contentLines.push(`   ${opt}`));
         }
         if (q.answer) {
           contentLines.push(`   *Teacher Key: ${q.answer}`);
