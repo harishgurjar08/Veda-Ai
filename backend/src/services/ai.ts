@@ -150,51 +150,225 @@ function generateMockPaper(assignment: Assignment): GeneratedPaper {
       // Smart content templates depending on subject/topic
       if (subject.toLowerCase().includes('electric') || topic.toLowerCase().includes('electric')) {
         if (type === 'mcq') {
-          text = `Which of the following materials is the best electrical conductor under standard conditions?`;
-          options = ['A. Purified Water', 'B. Copper Wire', 'C. Dry Oak Wood', 'D. Vulcanized Rubber'];
-          answer = 'B. Copper Wire. Copper has a high density of free conduction electrons.';
+          const mcqs = [
+            {
+              text: `Which of the following materials is the best electrical conductor under standard conditions?`,
+              options: ['A. Purified Water', 'B. Copper Wire', 'C. Dry Oak Wood', 'D. Vulcanized Rubber'],
+              answer: 'B. Copper Wire. Copper has a high density of free conduction electrons.'
+            },
+            {
+              text: `What is the SI unit of electrical resistance?`,
+              options: ['A. Ampere', 'B. Volt', 'C. Ohm', 'D. Watt'],
+              answer: 'C. Ohm. Resistance is defined as voltage divided by current.'
+            },
+            {
+              text: `According to Ohm's Law, what happens to the current in a circuit if resistance is doubled while voltage remains constant?`,
+              options: ['A. It doubles', 'B. It remains the same', 'C. It is halved', 'D. It becomes four times greater'],
+              answer: 'C. It is halved (I = V/R).'
+            },
+            {
+              text: `Which device is used to measure electrical current in a circuit?`,
+              options: ['A. Voltmeter', 'B. Ammeter', 'C. Galvanometer', 'D. Ohmmeter'],
+              answer: 'B. Ammeter. It is always connected in series.'
+            },
+            {
+              text: `Calculate the total equivalent resistance of three 6-ohm resistors connected in parallel.`,
+              options: ['A. 18 ohms', 'B. 2 ohms', 'C. 0.5 ohms', 'D. 12 ohms'],
+              answer: 'B. 2 ohms (1/R = 1/6 + 1/6 + 1/6 = 3/6 = 1/2).'
+            }
+          ];
+          const choice = mcqs[k % mcqs.length];
+          text = choice.text;
+          options = choice.options;
+          answer = choice.answer;
         } else if (type === 'short') {
-          text = `State Ohm's Law and write its mathematical representation. Explain the meaning of each symbol.`;
-          answer = `Ohm's Law states that current is directly proportional to voltage and inversely proportional to resistance (I = V/R). V is Potential Difference (volts), I is Current (amperes), and R is Resistance (ohms).`;
+          const shorts = [
+            {
+              text: `State Ohm's Law and write its mathematical representation. Explain the meaning of each symbol.`,
+              answer: `Ohm's Law states that current is directly proportional to voltage and inversely proportional to resistance (I = V/R). V is Potential Difference (volts), I is Current (amperes), and R is Resistance (ohms).`
+            },
+            {
+              text: `Explain the difference between electrical conductors and insulators with two examples of each.`,
+              answer: `Conductors permit electric charges to flow freely (e.g., copper, aluminum). Insulators resist the flow of charges (e.g., rubber, glass).`
+            },
+            {
+              text: `What is electric power? Write the formula to calculate electric power in terms of voltage and current.`,
+              answer: `Electric power is the rate at which electrical energy is consumed in a circuit. P = V * I.`
+            },
+            {
+              text: `Why are household electrical appliances always connected in parallel rather than in series?`,
+              answer: `Parallel connection ensures that if one appliance fails, others continue to work, and every appliance receives the full mains voltage.`
+            }
+          ];
+          const choice = shorts[k % shorts.length];
+          text = choice.text;
+          answer = choice.answer;
         } else if (type === 'long') {
-          text = `Distinguish between series and parallel electrical circuits. Provide diagrams/schematics explaining how current and potential difference are distributed in each configuration, and derive their respective formulas for equivalent resistance.`;
-          answer = `In series: R_eq = R1 + R2 + ... Current is uniform, voltage divides. In parallel: 1/R_eq = 1/R1 + 1/R2 + ... Voltage is uniform, current divides.`;
+          const longs = [
+            {
+              text: `Distinguish between series and parallel electrical circuits. Provide diagrams/schematics explaining how current and potential difference are distributed in each configuration, and derive their respective formulas for equivalent resistance.`,
+              answer: `In series: R_eq = R1 + R2 + ... Current is uniform, voltage divides. In parallel: 1/R_eq = 1/R1 + 1/R2 + ... Voltage is uniform, current divides.`
+            },
+            {
+              text: `Explain Joule's heating effect of electric current. Derive the expression for heat produced in a resistor and list three practical applications of this effect in daily life.`,
+              answer: `Joule's heating states that heat generated is proportional to the square of current, resistance, and time (H = I^2 * R * t). Applications include electric iron, toaster, and heater.`
+            }
+          ];
+          const choice = longs[k % longs.length];
+          text = choice.text;
+          answer = choice.answer;
         } else if (type === 'truefalse') {
-          text = `The resistance of an ideal voltmeter is assumed to be zero ohms to ensure no load is added to the circuit.`;
-          answer = `False. An ideal voltmeter has infinite resistance so that it does not draw any current from the circuit it is measuring.`;
+          const tfs = [
+            {
+              text: `The resistance of an ideal voltmeter is assumed to be zero ohms to ensure no load is added to the circuit.`,
+              answer: `False. An ideal voltmeter has infinite resistance so that it does not draw any current from the circuit it is measuring.`
+            },
+            {
+              text: `Conventional electric current flows in the opposite direction to the flow of electrons.`,
+              answer: `True. Electrons flow from negative to positive terminals while current is assumed from positive to negative.`
+            }
+          ];
+          const choice = tfs[k % tfs.length];
+          text = choice.text;
+          answer = choice.answer;
         } else {
-          text = `The SI unit of electrical potential difference is the ________, which is defined as one joule per coulomb.`;
-          answer = `volt`;
+          const blanks = [
+            {
+              text: `The SI unit of electrical potential difference is the ________, which is defined as one joule per coulomb.`,
+              answer: `volt`
+            },
+            {
+              text: `An instrument used to measure potential difference across a resistor is called a(n) ________.`,
+              answer: `voltmeter`
+            }
+          ];
+          const choice = blanks[k % blanks.length];
+          text = choice.text;
+          answer = choice.answer;
         }
       } else if (subject.toLowerCase().includes('english') || subject.toLowerCase().includes('lang')) {
         if (type === 'mcq') {
-          text = `Identify the sentence that represents a grammatically correct usage of the subjunctive mood.`;
-          options = [
-            'A. I wish I was a pilot so I could fly away.',
-            'B. The headmaster insisted that he be present at the ceremony.',
-            'C. If he is going, I would have gone too.',
-            'D. She behaves as if she knows everything.'
+          const mcqs = [
+            {
+              text: `Identify the sentence that represents a grammatically correct usage of the subjunctive mood.`,
+              options: [
+                'A. I wish I was a pilot so I could fly away.',
+                'B. The headmaster insisted that he be present at the ceremony.',
+                'C. If he is going, I would have gone too.',
+                'D. She behaves as if she knows everything.'
+              ],
+              answer: 'B. The subjunctive mood uses "be" in this demand/insistence clause.'
+            },
+            {
+              text: `Which of the following sentences contains a dangling modifier?`,
+              options: [
+                'A. Walking down the street, the trees looked beautiful.',
+                'B. Walking down the street, I saw beautiful trees.',
+                'C. The trees looked beautiful as I walked down the street.',
+                'D. While I was walking down the street, the trees were beautiful.'
+              ],
+              answer: 'A. "Walking down the street" grammatically modifies "the trees" incorrectly.'
+            }
           ];
-          answer = 'B. The subjunctive mood uses "be" in this demand/insistence clause.';
+          const choice = mcqs[k % mcqs.length];
+          text = choice.text;
+          options = choice.options;
+          answer = choice.answer;
         } else if (type === 'short') {
-          text = `Explain the difference between a metaphor and a simile. Give one original literary example of each.`;
-          answer = `A simile compares two things using "like" or "as" ("Her smile was as bright as the sun"). A metaphor makes a direct comparison without those words ("Her smile was a ray of sunshine").`;
+          const shorts = [
+            {
+              text: `Explain the difference between a metaphor and a simile. Give one original literary example of each.`,
+              answer: `A simile compares two things using "like" or "as" ("Her smile was as bright as the sun"). A metaphor makes a direct comparison without those words ("Her smile was a ray of sunshine").`
+            },
+            {
+              text: `Define active and passive voice. Rewrite the sentence 'The dog bit the man' in passive voice.`,
+              answer: `Active: Subject acts. Passive: Subject is acted upon. Passive: 'The man was bitten by the dog.'`
+            }
+          ];
+          const choice = shorts[k % shorts.length];
+          text = choice.text;
+          answer = choice.answer;
         } else {
-          text = `Analyze the central theme of conflict in the passage provided. Focus on the relationship between character motivations and cultural expectations.`;
-          answer = `The protagonist represents the conflict between individual freedom and societal duties.`;
+          const genericEng = [
+            {
+              text: `Analyze the central theme of conflict in the passage provided. Focus on the relationship between character motivations and cultural expectations.`,
+              answer: `The protagonist represents the conflict between individual freedom and societal duties.`
+            },
+            {
+              text: `Define alliteration and provide three examples from classical literature.`,
+              answer: `Alliteration is the repetition of the same initial consonant sounds (e.g., 'pristine peace', 'swift silent shadow').`
+            }
+          ];
+          const choice = genericEng[k % genericEng.length];
+          text = choice.text;
+          answer = choice.answer;
         }
       } else {
         // Generic academic questions
         if (type === 'mcq') {
-          text = `Which of the following options represents the primary step in the scientific method regarding ${topic}?`;
-          options = ['A. Performing a random experiment', 'B. Formulating an explanatory hypothesis', 'C. Publishing final conclusions', 'D. Disregarding outlier datasets'];
-          answer = 'B. Formulating an explanatory hypothesis is the logical next step after making observations.';
+          const mcqs = [
+            {
+              text: `Which of the following options represents the primary step in the scientific method regarding ${topic}?`,
+              options: ['A. Performing a random experiment', 'B. Formulating an explanatory hypothesis', 'C. Publishing final conclusions', 'D. Disregarding outlier datasets'],
+              answer: 'B. Formulating an explanatory hypothesis is the logical next step after making observations.'
+            },
+            {
+              text: `Which of the following is a primary source of data when researching ${topic}?`,
+              options: [
+                'A. A summary of the topic in an outdated textbook.',
+                'B. Direct interviews and field research with leading experts in ${topic}.',
+                'C. Random opinion posts on social media.',
+                'D. A fictional narrative referencing the concepts.'
+              ],
+              answer: 'B. Direct interviews and field studies provide original, primary data.'
+            },
+            {
+              text: `Which key factor plays the most critical role in the system optimization of ${topic}?`,
+              options: [
+                'A. Broad generalization of definitions',
+                'B. High quality feedback loops and constant data validation',
+                'C. Minimizing input variables entirely',
+                'D. Manual recording without computerized models'
+              ],
+              answer: 'B. High quality feedback loops and constants ensure system stability and optimization.'
+            }
+          ];
+          const choice = mcqs[k % mcqs.length];
+          text = choice.text;
+          options = choice.options;
+          answer = choice.answer;
         } else if (type === 'short') {
-          text = `Define the core principles of ${topic} and explain how they relate to modern educational research.`;
-          answer = `Core principles include hypothesis formulation, rigorous controls, and empirical validation applied directly to ${topic}.`;
+          const shorts = [
+            {
+              text: `Define the core principles of ${topic} and explain how they relate to modern educational research.`,
+              answer: `Core principles include hypothesis formulation, rigorous controls, and empirical validation applied directly to ${topic}.`
+            },
+            {
+              text: `Outline two major challenges commonly faced by practitioners when working with ${topic} today.`,
+              answer: `Challenges include data consistency across varying demographics and integration with legacy tools.`
+            },
+            {
+              text: `Explain the significance of recent advancements in the field of ${topic}.`,
+              answer: `Recent advancements allow automated data aggregation, reducing manual latency and increasing analysis precision.`
+            }
+          ];
+          const choice = shorts[k % shorts.length];
+          text = choice.text;
+          answer = choice.answer;
         } else {
-          text = `Provide a comprehensive critique on the historical development of ${topic}. Discuss the key thinkers, breakthroughs, and contemporary limitations of the current theories.`;
-          answer = `Key aspects include foundational discoveries, subsequent revisions, and current challenges in applying ${topic} universally.`;
+          const longs = [
+            {
+              text: `Provide a comprehensive critique on the historical development of ${topic}. Discuss the key thinkers, breakthroughs, and contemporary limitations of the current theories.`,
+              answer: `Key aspects include foundational discoveries, subsequent revisions, and current challenges in applying ${topic} universally.`
+            },
+            {
+              text: `Detail an experimental framework that could be used to evaluate the efficiency of ${topic} in a controlled environment.`,
+              answer: `A robust framework involves defining independent variables, implementing strict double-blind trials, and statistical regression analysis.`
+            }
+          ];
+          const choice = longs[k % longs.length];
+          text = choice.text;
+          answer = choice.answer;
         }
       }
       
@@ -204,6 +378,9 @@ function generateMockPaper(assignment: Assignment): GeneratedPaper {
       }
       if (answer.includes('${topic}')) {
         answer = answer.replace(/\$\{topic\}/g, topic);
+      }
+      if (options.length > 0) {
+        options = options.map(o => o.includes('${topic}') ? o.replace(/\$\{topic\}/g, topic) : o);
       }
 
       sectionQuestions.push({
