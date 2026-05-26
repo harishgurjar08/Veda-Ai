@@ -1,0 +1,19 @@
+{
+  "name": "vedaai-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "backend",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=apps/web\" \"npm run dev --workspace=backend\" \"npm run dev --workspace=apps/worker\"",
+    "build": "npm run build --workspace=apps/web && npm run build --workspace=backend && npm run build --workspace=apps/worker",
+    "start": "concurrently \"npm run start --workspace=apps/web\" \"npm run start --workspace=backend\" \"npm run start --workspace=apps/worker\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.4.5"
+  }
+}
