@@ -5,7 +5,7 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { Sidebar } from '../../../components/Sidebar';
 import { Header } from '../../../components/Header';
 import axios from 'axios';
-import { Assignment } from 'shared';
+import { Assignment } from '../../../types';
 import { 
   Download, 
   RefreshCw, 

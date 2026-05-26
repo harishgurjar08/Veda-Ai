@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Sidebar } from '../../components/Sidebar';
 import { Header } from '../../components/Header';
 import axios from 'axios';
-import { Assignment } from 'shared';
+import { Assignment } from '../../types';
 import { 
   Plus, 
   Search, 
