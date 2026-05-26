@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Assignment } from 'shared';
+import { Assignment } from '../types';
 import { AssignmentModel } from '../models/Assignment';
 
 let isMongoConnected = false;

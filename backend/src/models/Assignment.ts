@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { Assignment as IAssignment, GeneratedPaper as IGeneratedPaper } from 'shared';
+import { Assignment as IAssignment, GeneratedPaper as IGeneratedPaper } from '../types';
 
 const QuestionSchema = new Schema({
   id: { type: String, required: true },

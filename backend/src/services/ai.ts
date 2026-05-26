@@ -1,4 +1,4 @@
-import { Assignment, GeneratedPaper, Section, Question } from 'shared';
+import { Assignment, GeneratedPaper, Section, Question } from '../types';
 
 /**
  * Builds the exact prompt structure requested in implementation.md

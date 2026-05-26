@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { Assignment } from 'shared';
+import { Assignment } from '../types';
 
 /**
  * Generates an A4 PDF of the examination paper.
