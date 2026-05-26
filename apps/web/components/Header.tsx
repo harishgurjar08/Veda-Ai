@@ -51,7 +51,7 @@ export function Header({ title, showBack = false }: HeaderProps) {
 
   return (
     <>
-      <header className="h-16 border-b border-[#E5E9F0] bg-white px-4 md:px-6 flex items-center justify-between sticky top-0 z-30">
+      <header className="h-16 print:hidden border-b border-[#E5E9F0] bg-white px-4 md:px-6 flex items-center justify-between sticky top-0 z-30">
         
         {/* Left Side: Desktop title / Back button OR Mobile Logo */}
         <div className="flex items-center gap-4">

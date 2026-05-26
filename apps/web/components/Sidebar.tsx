@@ -36,7 +36,7 @@ export function Sidebar() {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex w-64 border-r border-[#E5E9F0] bg-white flex flex-col h-screen sticky top-0 shrink-0">
+      <aside className="hidden md:flex print:hidden w-64 border-r border-[#E5E9F0] bg-white flex flex-col h-screen sticky top-0 shrink-0">
         {/* Brand logo */}
         <div className="p-6 flex items-center gap-3">
           <div className="w-9 h-9 bg-gradient-to-tr from-[#FF5E36] to-[#FFA07A] rounded-xl flex items-center justify-center text-white shadow-md shadow-[#FF5E36]/20">
@@ -119,14 +119,14 @@ export function Sidebar() {
       {/* Mobile Floating Action Button (FAB) */}
       <Link 
         href="/create" 
-        className="md:hidden fixed bottom-20 right-5 z-40 bg-white hover:bg-slate-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-[#E2E8F0] text-[#FF5E36] active:scale-95 transition-all duration-200"
+        className="md:hidden print:hidden fixed bottom-20 right-5 z-40 bg-white hover:bg-slate-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-[#E2E8F0] text-[#FF5E36] active:scale-95 transition-all duration-200"
         title="Create Assignment"
       >
         <Plus className="w-6 h-6 stroke-[3]" />
       </Link>
 
       {/* Mobile Bottom Navigation Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#111827] border-t border-slate-800 flex items-center justify-around px-2 z-40">
+      <div className="md:hidden print:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#111827] border-t border-slate-800 flex items-center justify-around px-2 z-40">
         {mobileMenuItems.map((item) => {
           const isActive = pathname === item.path || (item.path === '/assignments' && pathname.startsWith('/paper')) || (item.path === '/' && pathname === '/assignments');
           return (

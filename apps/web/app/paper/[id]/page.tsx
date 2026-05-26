@@ -67,26 +67,8 @@ export default function PaperViewPage() {
     }
   };
 
-  const handleDownloadPDF = async () => {
-    try {
-      console.log('Downloading PDF...');
-      const response = await axios.post(`${API_URL}/api/assignments/${id}/export-pdf`, null, {
-        responseType: 'blob'
-      });
-      
-      const blob = new Blob([response.data], { type: 'application/pdf' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `${assignment?.subject || 'Assessment'}-${assignment?.topic || 'Chapter'}-paper.pdf`);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (err) {
-      console.error('PDF generation failed, initiating print fallback...', err);
-      // Fallback is printing the print-mode URL
-      window.print();
-    }
+  const handleDownloadPDF = () => {
+    window.print();
   };
 
   const handleCopyLink = () => {
@@ -233,16 +215,38 @@ export default function PaperViewPage() {
 
   // Desktop Standard View Layout
   return (
-    <div className="flex bg-[#F8FAFC] min-h-screen text-[#1E293B]">
+    <div className="flex bg-[#F8FAFC] min-h-screen text-[#1E293B] print:bg-white print:min-h-0">
+      {/* Print Stylesheet Hook */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media print {
+          @page {
+            size: A4;
+            margin: 1.5cm;
+          }
+          body {
+            background: white !important;
+            color: black !important;
+          }
+          .question-item {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+          }
+          .page-break {
+            page-break-before: always !important;
+            break-before: page !important;
+          }
+        }
+      `}} />
+
       {/* Reusable Sidebar */}
       <Sidebar />
 
       {/* Main Container */}
-      <main className="flex-1 flex flex-col min-w-0">
+      <main className="flex-1 flex flex-col min-w-0 print:bg-white">
         <Header title="Assessment Paper" />
 
         {/* Action Toolbar */}
-        <div className="bg-white border-b border-[#E2E8F0] p-4 flex flex-wrap gap-4 items-center justify-between sticky top-16 z-20 shadow-sm">
+        <div className="bg-white border-b border-[#E2E8F0] p-4 flex flex-wrap gap-4 items-center justify-between sticky top-16 z-20 shadow-sm print:hidden">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowAnswers(!showAnswers)}
@@ -303,9 +307,9 @@ export default function PaperViewPage() {
         </div>
 
         {/* Paper Sheet Wrapper */}
-        <div className="flex-1 p-8 max-w-4xl w-full mx-auto">
+        <div className="flex-1 p-8 print:p-0 max-w-4xl print:max-w-none w-full mx-auto">
           {/* Green AI confirmation banner at the top of the paper */}
-          <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold rounded-2xl flex items-center gap-2 shadow-sm animate-in fade-in slide-in-from-top-3">
+          <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold rounded-2xl flex items-center gap-2 shadow-sm animate-in fade-in slide-in-from-top-3 print:hidden">
             <div className="w-2 h-2 bg-emerald-500 rounded-full animate-ping shrink-0" />
             <span>
               Certainly, Teacher! Here is your customized Question Paper for your {assignment.grade} {assignment.subject} classes on the {assignment.topic} chapter.
@@ -313,7 +317,7 @@ export default function PaperViewPage() {
           </div>
 
           {/* Actual Sheet representation */}
-          <div className="bg-white rounded-3xl border border-[#E2E8F0] shadow-xl p-12 text-[#1E293B] min-h-[29.7cm] flex flex-col relative overflow-hidden">
+          <div className="bg-white rounded-3xl border border-[#E2E8F0] shadow-xl p-12 print:p-0 print:border-none print:shadow-none text-[#1E293B] min-h-[29.7cm] print:min-h-0 flex flex-col relative overflow-hidden print:overflow-visible">
             
             {/* Margins indicator subtle outline */}
             <div className="absolute inset-4 border border-dashed border-slate-100 rounded-2xl pointer-events-none" />
@@ -398,7 +402,7 @@ export default function PaperViewPage() {
                   {/* Section Questions */}
                   <div className="space-y-6">
                     {section.questions.map((q) => (
-                      <div key={q.id} className="space-y-2 group/q">
+                      <div key={q.id} className="space-y-2 group/q question-item">
                         <div className="flex justify-between items-start font-bold text-xs">
                           <span className="flex-1 pr-6 text-[#1E293B]">
                             Q{q.number}. {q.text}
